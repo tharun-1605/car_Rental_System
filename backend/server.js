@@ -4,15 +4,14 @@ import carRoutes from './carRoutes.js';
 
 const app = express();
 
-
 app.use(express.json());
-
 
 const mongoURI = 'mongodb://127.0.0.1:27017/CAR'; 
 mongoose.connect(mongoURI)
     .then(() => console.log('MongoDB connected successfully'))
     .catch(err => console.error('MongoDB connection error:', err));
 
+// Use the car routes
 app.use('/api', carRoutes); 
 
 app.get('/', (req, res) => {

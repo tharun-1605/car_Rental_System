@@ -1,9 +1,9 @@
 import express from 'express';
 import mongoose from 'mongoose';
+import { v4 as uuidv4 } from 'uuid';
+import Booking from './bookingModel.js'; // Import the Booking model
 
 // Car model
-import { v4 as uuidv4 } from 'uuid';
-
 const carSchema = new mongoose.Schema({
     _id: {
         type: String,
@@ -15,7 +15,7 @@ const carSchema = new mongoose.Schema({
     price: Number,
     location: String,
     Seats: Number,
-    rating:String,
+    rating: String,
     Date: Date
 });
 
@@ -23,7 +23,42 @@ const Car = mongoose.model('Car', carSchema);
 
 const router = express.Router(); // Keep this declaration
 
-// API Endpoints
+// Create Booking
+router.post('/bookings', async (req, res) => {
+    const { name, phoneNumber, email, licenseNumber, aadharNumber, amount } = req.body;
+    const booking = new Booking({
+        name,
+        phoneNumber,
+        email,
+        licenseNumber,
+        aadharNumber,
+        amount
+    });
+    await booking.save();
+    res.status(201).json({ message: 'Booking created', booking });
+});
+
+// Read Bookings
+router.get('/bookings', async (req, res) => {
+    const bookings = await Booking.find();
+    res.status(200).json(bookings);
+});
+
+// Update Booking
+router.put('/bookings/:name', async (req, res) => {
+    const { nmae } = req.params;
+    const updatedBooking = await Booking.findByIdAndUpdate(name, req.body, { new: true });
+    res.status(200).json({ message: 'Booking updated', updatedBooking });
+});
+
+// Delete Booking
+router.delete('/bookings/:id', async (req, res) => {
+    const { id } = req.params;
+    await Booking.findByIdAndDelete(id);
+    res.status(204).send();
+});
+
+// API Endpoints for Cars
 router.get('/cars', async (req, res) => {
     const cars = await Car.find();
     res.json(cars);
@@ -36,21 +71,21 @@ router.get('/cars/:location', async (req, res) => {
 
 router.post('/cars', async (req, res) => {
     const id = uuidv4();
-    const { make, model, year, price, location, Seats,rating } = req.body;
+    const { make, model, year, price, location, Seats, rating } = req.body;
     if (!location || !Seats) {
         return res.status(400).json({ error: 'Location and Seats are required.' });
     }
 
     const formattedPrice = price ? Number(price.replace(/,/g, '')) : undefined;
-    const newCar = new Car({ make, model, year, price: formattedPrice, location, Seats,rating });
+    const newCar = new Car({ make, model, year, price: formattedPrice, location, Seats, rating });
     await newCar.save();
     res.status(201).json(newCar);
 });
 
 router.put('/cars/:id', async (req, res) => {
-    const {make, model, year, price,location, Seats,rating } = req.body;
+    const { make, model, year, price, location, Seats, rating } = req.body;
     const formattedPrice = price ? Number(price.replace(/,/g, '')) : undefined;
-    const updatedCar = await Car.findOneAndUpdate({ _id: req.params.id }, {make, model, year,  price: formattedPrice,location, Seats,rating }, { new: true });
+    const updatedCar = await Car.findOneAndUpdate({ _id: req.params.id }, { make, model, year, price: formattedPrice, location, Seats, rating }, { new: true });
     res.json(updatedCar);
 });
 
