@@ -62,15 +62,20 @@ function App() {
     console.log('Searching for cars in:', location, 'on:', date);
   };
 
-  return (
+  const onRentNow = (title) => {
+    console.log(`Renting car: ${title}`);
+    // Additional logic for renting can be added here
+  };
+
+  return ( 
     <div className="min-h-screen bg-gray-50">
       <Router>
         <Navbar />
         <Hero onSearch={handleSearch} />        
-        <Routes>
-          {/* <Route path="/" element={<CarListing cars={cars} location={location} />} /> */}
-          {/* <Route path="/cars" element={<CarListing cars={cars} location={location} />} /> */}
-        </Routes>
+        {/* <Routes>
+          <Route path="/" element={<CarListing cars={cars} location={location} onRentNow={setShowListForm} />} />
+          <Route path="/cars" element={<CarListing cars={cars} location={location} onRentNow={setShowListForm} />} />
+        </Routes> */}
 
         <div className="max-w-7xl mx-auto px-4 py-12">
           <div className="flex justify-between items-center mb-8">

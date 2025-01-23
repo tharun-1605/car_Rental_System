@@ -12,9 +12,9 @@ const Navbar = () => {
           </div>
           
           <div className="hidden md:flex items-center space-x-8">
-            {/* <a href="#" className="text-gray-600 hover:text-blue-600">List Your Car</a>
-            <a href="#" className="text-gray-600 hover:text-blue-600">Find a Car</a>
-            <a href="#" className="text-gray-600 hover:text-blue-600">How it Works</a> */}
+            <a href="/cars" className="text-gray-600 hover:text-blue-600">List Your Car</a>
+            <a href="/cars" className="text-gray-600 hover:text-blue-600">Find a Car</a>
+            <a href="#" className="text-gray-600 hover:text-blue-600">How it Works</a>
             <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 flex items-center space-x-2">
               <User className="h-4 w-4" />
               <span>Sign In</span>

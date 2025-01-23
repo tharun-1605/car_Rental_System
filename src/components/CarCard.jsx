@@ -1,7 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { MapPin, Star, Users } from 'lucide-react';
+import BookingForm from './BookingForm';
 
 const CarCard = ({ image, title, price, location, rating, seats }) => {
+  const [showBookingForm, setShowBookingForm] = useState(false);
+  const [confirmationMessage, setConfirmationMessage] = useState('');
+
+  const handleRentNow = () => {
+    setShowBookingForm(true);
+  };
+
+  const handleConfirm = (message) => {
+    setConfirmationMessage(message);
+    setShowBookingForm(false);
+  };
+
   return (
     <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
       <div className="relative h-48">
@@ -28,11 +41,19 @@ const CarCard = ({ image, title, price, location, rating, seats }) => {
             <span className="text-2xl font-bold text-blue-600">${price}</span>
             <span className="text-gray-500 text-sm">/day</span>
           </div>
-          <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+          <button
+            onClick={handleRentNow} 
+            className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
             Rent Now
           </button>
         </div>
       </div>
+      {showBookingForm && (
+        <BookingForm car={{ title, price }} onConfirm={handleConfirm} />
+      )}
+      {confirmationMessage && (
+        <div className="mt-4 text-green-600">{confirmationMessage}</div>
+      )}
     </div>
   );
 };

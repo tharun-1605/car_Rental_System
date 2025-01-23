@@ -15,6 +15,7 @@ const carSchema = new mongoose.Schema({
     price: Number,
     location: String,
     Seats: Number,
+    rating:String,
     Date: Date
 });
 
@@ -35,21 +36,21 @@ router.get('/cars/:location', async (req, res) => {
 
 router.post('/cars', async (req, res) => {
     const id = uuidv4();
-    const { make, model, year, price, location, Seats } = req.body;
+    const { make, model, year, price, location, Seats,rating } = req.body;
     if (!location || !Seats) {
         return res.status(400).json({ error: 'Location and Seats are required.' });
     }
 
     const formattedPrice = price ? Number(price.replace(/,/g, '')) : undefined;
-    const newCar = new Car({ make, model, year, price: formattedPrice, location, Seats });
+    const newCar = new Car({ make, model, year, price: formattedPrice, location, Seats,rating });
     await newCar.save();
     res.status(201).json(newCar);
 });
 
 router.put('/cars/:id', async (req, res) => {
-    const {make, model, year, price,location, Seats } = req.body;
+    const {make, model, year, price,location, Seats,rating } = req.body;
     const formattedPrice = price ? Number(price.replace(/,/g, '')) : undefined;
-    const updatedCar = await Car.findOneAndUpdate({ _id: req.params.id }, {make, model, year,  price: formattedPrice,location, Seats }, { new: true });
+    const updatedCar = await Car.findOneAndUpdate({ _id: req.params.id }, {make, model, year,  price: formattedPrice,location, Seats,rating }, { new: true });
     res.json(updatedCar);
 });
 
