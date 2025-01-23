@@ -3,12 +3,12 @@ import { Car, DollarSign, MapPin, Camera } from 'lucide-react';
 
 const ListCarForm = ({ onAddCar }) => {
   const [carDetails, setCarDetails] = useState({
-    make: '',
-    model: '',
+    title: '',
+    rating: '',
     year: '',
     seats: '',
     location: '',
-    dailyRate: '',
+    price: '',
   });
 
   const handleChange = (e) => {
@@ -21,13 +21,13 @@ const ListCarForm = ({ onAddCar }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!carDetails.make || !carDetails.model || !carDetails.year || !carDetails.seats || !carDetails.location || !carDetails.dailyRate) {
+    if (!carDetails.title || !carDetails.rating || !carDetails.year || !carDetails.seats || !carDetails.location || !carDetails.price) {
         alert('Please fill out all fields before submitting.');
         return; // Prevent submission if validation fails
     } 
     
     onAddCar(carDetails); // Call the function to add the new car
-    setCarDetails({ make: '', model: '', year: '', seats: '', location: '', dailyRate: '' }); // Reset form
+    setCarDetails({ title: '', rating: '', year: '', seats: '', location: '', price: '' }); // Reset form
   };
 
   return (
@@ -39,16 +39,16 @@ const ListCarForm = ({ onAddCar }) => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <input
               type="text"
-              name="make"
-              value={carDetails.make}
+              name="title"
+              value={carDetails.title}
               onChange={handleChange}
               placeholder="Make"
               className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent"
             />
             <input
               type="text"
-              name="model"
-              value={carDetails.model}
+              name="rating"
+              value={carDetails.rating}
               onChange={handleChange}
               placeholder="Model"
               className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent"
@@ -93,8 +93,8 @@ const ListCarForm = ({ onAddCar }) => {
             <DollarSign className="h-5 w-5 text-gray-400" />
             <input
               type="number"
-              name="dailyRate"
-              value={carDetails.dailyRate}
+              name="price"
+              value={carDetails.price}
               onChange={handleChange}
               placeholder="Daily rate"
               className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent"
