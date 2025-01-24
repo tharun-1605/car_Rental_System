@@ -1,22 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { MapPin, Star, Users } from 'lucide-react';
-import BookingForm from './BookingForm';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
 const CarCard = ({ image, title, price, location, rating, seats }) => {
-  const [showBookingForm, setShowBookingForm] = useState(false);
-  const [confirmationMessage, setConfirmationMessage] = useState('');
+  const navigate = useNavigate(); // Create navigate function
 
   const handleRentNow = () => {
-    setShowBookingForm(true);
-  };
-
-  const handleConfirm = (message) => {
-    setConfirmationMessage(message);
-    setShowBookingForm(false);
+    navigate('/booking', { state: { title, price } }); // Navigate to booking form with car details
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+    <div className="w-full h-auto bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
       <div className="relative h-48">
         <img src={image} alt={title} className="w-full h-full object-cover" />
       </div>
@@ -48,12 +42,6 @@ const CarCard = ({ image, title, price, location, rating, seats }) => {
           </button>
         </div>
       </div>
-      {showBookingForm && (
-        <BookingForm car={{ title, price }} onConfirm={handleConfirm} />
-      )}
-      {confirmationMessage && (
-        <div className="mt-4 text-green-600">{confirmationMessage}</div>
-      )}
     </div>
   );
 };

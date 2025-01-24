@@ -1,106 +1,30 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import CarCard from './components/CarCard';
-import ListCarForm from './components/ListCarForm';
-import CarListing from './components/CarListing';
+import Signup from './components/Signup';
+import Login from './components/Login'; // Import the Login component
+import Home from './components/Home'; // Import the Home component
+import BookingForm from './components/BookingForm'; // Import the BookingForm component
 
-const originalCars = [
-  {
-    id: 1,
-    image: 'https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&q=80',
-    title: 'Tesla Model 3',
-    price: 150,
-    location: 'San Francisco, CA',
-    rating: 4.9,
-    seats: 5,
-  },
-  {
-    id: 2,
-    image: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80',
-    title: 'Porsche 911',
-    price: 300,
-    location: 'Los Angeles, CA',
-    rating: 4.8,
-    seats: 2,
-  },
-  {
-    id: 3,
-    image: 'https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&q=80',
-    title: 'BMW M4',
-    price: 200,
-    location: 'New York, NY',
-    rating: 4.7,
-    seats: 4,
-  },
-];
-
-function App() {
-  const [cars, setCars] = useState(originalCars); // State to hold the list of cars
-  const [showListForm, setShowListForm] = useState(false);
-  const [location, setLocation] = useState('');
-  const [date, setDate] = useState('');
-
-  const addCar = (newCar) => {
-  const carExists = cars.some(car => car.title === newCar.title); // Check for duplicates
-  if (!carExists) {
-    const carWithId = { ...newCar, id: cars.length + 1 }; // Assign a new ID
-    setCars((prevCars) => [...prevCars, carWithId]); // Update the state with the new car
-  } else {
-    console.log('Car already exists!');
-  }
-};
-
-  const handleSearch = (location, date) => {
-    setLocation(location);
-    setDate(date);
-    const filteredCars = originalCars.filter(car => 
-      car.location.toLowerCase().includes(location.toLowerCase())
-    );
-    setCars(filteredCars); // Update the cars state with filtered results
-    console.log('Searching for cars in:', location, 'on:', date);
-  };
-
-  const onRentNow = (title) => {
-    console.log(`Renting car: ${title}`);
-    // Additional logic for renting can be added here
+const App = () => {
+  const [cars, setCars] = useState([]); // State for cars
+  const [location, setLocation] = useState(''); // State for location
+  const onRentNow = (carId) => {
+    // Function to handle renting a car
+    console.log(`Renting car with ID: ${carId}`);
   };
 
   return ( 
     <div className="min-h-screen bg-gray-50">
-      <Router>
-        <Navbar />
-        <Hero onSearch={handleSearch} />        
-        {/* <Routes>
-          <Route path="/" element={<CarListing cars={cars} location={location} onRentNow={setShowListForm} />} />
-          <Route path="/cars" element={<CarListing cars={cars} location={location} onRentNow={setShowListForm} />} />
-        </Routes> */}
-
-        <div className="max-w-7xl mx-auto px-4 py-12">
-          <div className="flex justify-between items-center mb-8">
-            <h2 className="text-2xl font-bold text-gray-800">Featured Cars</h2>
-            <button
-              onClick={() => setShowListForm(!showListForm)}
-              className="text-blue-600 hover:text-blue-700"
-            >
-              {showListForm ? 'View Cars' : 'List Your Car'}
-            </button>
-          </div>
-
-          {showListForm ? ( 
-            <ListCarForm onAddCar={addCar} />
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {cars.map((car) => (
-                <CarCard key={car.id} {...car} />
-              ))}
-            </div>
-          )}
-        </div>
+      <Router>       
+        <Routes>
+          <Route path="/" element={<Login />} /> {/* Login page */}
+          <Route path="/home" element={<Home cars={cars} location={location} onRentNow={onRentNow} />} /> {/* Home page */}
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/booking" element={<BookingForm />} /> {/* Booking form page */}
+        </Routes>
       </Router>
     </div>
   );
-}
+};
 
 export default App;

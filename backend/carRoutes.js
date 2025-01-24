@@ -1,9 +1,12 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import { v4 as uuidv4 } from 'uuid';
-import Booking from './bookingModel.js'; // Import the Booking model
+import Booking from './bookingModel.js';
+import bcrypt from "bcrypt"; 
+import User from './SigningModel.js';
+import jwt from "jsonwebtoken";
 
-// Car model
+
 const carSchema = new mongoose.Schema({
     _id: {
         type: String,
@@ -21,9 +24,9 @@ const carSchema = new mongoose.Schema({
 
 const Car = mongoose.model('Car', carSchema);
 
-const router = express.Router(); // Keep this declaration
+const router = express.Router(); 
 
-// Create Booking
+
 router.post('/bookings', async (req, res) => {
     const { name, phoneNumber, email, licenseNumber, aadharNumber, amount } = req.body;
     const booking = new Booking({
@@ -38,27 +41,27 @@ router.post('/bookings', async (req, res) => {
     res.status(201).json({ message: 'Booking created', booking });
 });
 
-// Read Bookings
+
 router.get('/bookings', async (req, res) => {
     const bookings = await Booking.find();
     res.status(200).json(bookings);
 });
 
-// Update Booking
+
 router.put('/bookings/:name', async (req, res) => {
-    const { nmae } = req.params;
+    const { name } = req.params;
     const updatedBooking = await Booking.findByIdAndUpdate(name, req.body, { new: true });
     res.status(200).json({ message: 'Booking updated', updatedBooking });
 });
 
-// Delete Booking
+
 router.delete('/bookings/:id', async (req, res) => {
     const { id } = req.params;
     await Booking.findByIdAndDelete(id);
     res.status(204).send();
 });
 
-// API Endpoints for Cars
+
 router.get('/cars', async (req, res) => {
     const cars = await Car.find();
     res.json(cars);
@@ -77,7 +80,7 @@ router.post('/cars', async (req, res) => {
     }
 
     const formattedPrice = price ? Number(price.replace(/,/g, '')) : undefined;
-    const newCar = new Car({ make, model, year, price: formattedPrice, location, Seats, rating });
+    const newCar = new Car({ id,make, model, year, price: formattedPrice, location, Seats, rating });
     await newCar.save();
     res.status(201).json(newCar);
 });
@@ -85,7 +88,13 @@ router.post('/cars', async (req, res) => {
 router.put('/cars/:id', async (req, res) => {
     const { make, model, year, price, location, Seats, rating } = req.body;
     const formattedPrice = price ? Number(price.replace(/,/g, '')) : undefined;
-    const updatedCar = await Car.findOneAndUpdate({ _id: req.params.id }, { make, model, year, price: formattedPrice, location, Seats, rating }, { new: true });
+    const updatedCar = await Car.findOneAndUpdate({ _id: req.params.id }, 
+        { 
+            make, model, year, price: formattedPrice, location, Seats, rating 
+        }, 
+        {
+             new: true 
+            });
     res.json(updatedCar);
 });
 
@@ -94,4 +103,34 @@ router.delete('/cars/:id', async (req, res) => {
     res.status(204).send();
 });
 
-export default router; // Ensure this line is included
+router.post("/createuser", async (req, res) => {
+    const { email, username, password } = req.body;
+    const user = await User.findOne({ email });
+    if (user) {
+        return res.status(400).json({ message: "User already exists" });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const newUser = new User({ email, username, password: hashedPassword, id: uuidv4() });
+    await newUser.save();
+    return res.status(201).json({ message: "User created successfully" });
+});
+
+router.post("/login", async (req, res) => {
+    const { email, password } = req.body;
+    const user = await User.findOne({ email });
+    if (!user) {
+        return res.status(400).json({ message: "User not found" });
+    }
+
+    const isValidPassword = await bcrypt.compare(password, user.password);
+    if (!isValidPassword) {
+        return res.status(400).json({ message: "Invalid password" });
+    }
+    const token=jwt.sign({id:user.id},"hello",{expiresIn:'1h'})
+    res.status(200).json({token})
+
+    return res.status(200).json({ message: "Login successful" });
+});
+
+export default router; 

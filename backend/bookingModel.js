@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import { v4 as uuidv4 } from 'uuid';
 
-// Booking model
+
 const bookingSchema = new mongoose.Schema({
     _id: {
         type: String,

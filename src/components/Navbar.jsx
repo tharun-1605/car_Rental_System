@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Car, User, Menu } from 'lucide-react';
 
 const Navbar = () => {
@@ -15,10 +16,16 @@ const Navbar = () => {
             <a href="/cars" className="text-gray-600 hover:text-blue-600">List Your Car</a>
             <a href="/cars" className="text-gray-600 hover:text-blue-600">Find a Car</a>
             <a href="#" className="text-gray-600 hover:text-blue-600">How it Works</a>
+            {/* <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 flex items-center space-x-2"> */}
+            {/* <Link to="/signup" className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 flex items-center space-x-2">
+              <User className="h-4 w-4" />
+              <span>Sign Up</span>
+            </Link> */}
+            {/* </button>
             <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 flex items-center space-x-2">
               <User className="h-4 w-4" />
-              <span>Sign In</span>
-            </button>
+              <span>Login</span>
+            </button> */}
           </div>
           
           <div className="md:hidden">

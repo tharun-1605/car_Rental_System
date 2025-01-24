@@ -1,11 +1,9 @@
 import React from 'react';
 import { Search, Calendar, MapPin } from 'lucide-react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
 const Hero = ({ onSearch }) => {
     const [location, setLocation] = React.useState('');
     const [date, setDate] = React.useState('');
-    const navigate = useNavigate(); // Create navigate function
 
     return (
         <div className="relative h-[500px]">
@@ -30,8 +28,8 @@ const Hero = ({ onSearch }) => {
                                     type="text"
                                     placeholder="Location"
                                     className="w-full focus:outline-none"
-                                    value={location} // Set the value to the location state
-                                    onChange={(e) => setLocation(e.target.value)} // Update location state on change
+                                    value={location}
+                                    onChange={(e) => setLocation(e.target.value)}
                                 />
                             </div>
                             <div className="flex items-center space-x-2 border-b md:border-b-0 md:border-r border-gray-200 pb-2 md:pb-0 md:pr-4">
@@ -39,14 +37,13 @@ const Hero = ({ onSearch }) => {
                                 <input
                                     type="date"
                                     className="w-full focus:outline-none"
-                                    value={date} // Set the value to the date state
-                                    onChange={(e) => setDate(e.target.value)} // Update date state on change
+                                    value={date}
+                                    onChange={(e) => setDate(e.target.value)}
                                 />
                             </div>
                             <button 
                                 onClick={() => {
-                                    onSearch(location, date); // Call onSearch with location and date
-                                    navigate('/cars'); // Navigate after search
+                                    onSearch(location, date);
                                 }}
                                 className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 flex items-center justify-center space-x-2"
                             >

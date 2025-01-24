@@ -1,18 +1,21 @@
 import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom'; // Import useLocation
 
-const BookingForm = ({ car, onConfirm }) => {
+const BookingForm = () => {
+  const location = useLocation(); // Get the location object
+  const car = location.state; // Access the car details from the state
+
   const [name, setName] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState(''); 
   const [licenseNumber, setLicenseNumber] = useState('');
-  const [location, setLocation] = useState('');
+  const [locationInput, setLocation] = useState('');
   const [email, setEmail] = useState('');
   const [aadhaarNumber, setAadhaarNumber] = useState('');
   const [amount, setAmount] = useState(car.price);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Logic to handle booking confirmation
-    onConfirm(`Booking confirmed for ${car.title}. Amount to be paid: $${amount}`);
+    alert(`Booking confirmed for ${car.title}. Amount to be paid: $${amount}`);
   };
 
   return (
@@ -32,7 +35,7 @@ const BookingForm = ({ car, onConfirm }) => {
       </div>
       <div className="mb-4">
         <label className="block text-sm font-medium text-gray-700">Location</label>
-        <input type="text" value={location} onChange={(e) => setLocation(e.target.value)} required className="mt-1 block w-full border border-gray-300 rounded-md p-2" />
+        <input type="text" value={locationInput} onChange={(e) => setLocation(e.target.value)} required className="mt-1 block w-full border border-gray-300 rounded-md p-2" />
       </div>
       <div className="mb-4">
         <label className="block text-sm font-medium text-gray-700">Email</label>
