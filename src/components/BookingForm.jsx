@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom'; // Import useLocation
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
 const BookingForm = () => {
   const location = useLocation(); // Get the location object
+  const navigate = useNavigate(); // Initialize navigate
   const car = location.state; // Access the car details from the state
 
   const [name, setName] = useState('');
@@ -16,6 +18,7 @@ const BookingForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     alert(`Booking confirmed for ${car.title}. Amount to be paid: $${amount}`);
+    navigate('/home'); // Navigate to home page after confirmation
   };
 
   return (

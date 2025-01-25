@@ -13,19 +13,15 @@ const Navbar = () => {
           </div>
           
           <div className="hidden md:flex items-center space-x-8">
-            <a href="/cars" className="text-gray-600 hover:text-blue-600">List Your Car</a>
+            <a href="/listyourcars" className="text-gray-600 hover:text-blue-600">List Your Car</a>
             <a href="/cars" className="text-gray-600 hover:text-blue-600">Find a Car</a>
-            <a href="#" className="text-gray-600 hover:text-blue-600">How it Works</a>
-            {/* <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 flex items-center space-x-2"> */}
-            {/* <Link to="/signup" className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 flex items-center space-x-2">
-              <User className="h-4 w-4" />
-              <span>Sign Up</span>
-            </Link> */}
-            {/* </button>
-            <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 flex items-center space-x-2">
-              <User className="h-4 w-4" />
-              <span>Login</span>
-            </button> */}
+            <a href="/customer-care" className="text-gray-600 hover:text-blue-600">Customer Care</a>
+            <a href="/cars" className="text-gray-600 hover:text-blue-600">How it Works</a>
+            <a href="/profile" className="text-gray-600 hover:text-blue-600">Profile</a>
+            {/* Profile Logo as Button */}
+            <button className="flex items-center space-x-2" onClick={() => alert('Profile clicked!')}>
+              <img src="src/assets/222222221qqqq1111.jpg" alt="Profile" className="h-8 w-8 rounded-full" />
+            </button>
           </div>
           
           <div className="md:hidden">

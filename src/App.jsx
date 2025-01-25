@@ -1,15 +1,23 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Signup from './components/Signup';
-import Login from './components/Login'; // Import the Login component
-import Home from './components/Home'; // Import the Home component
-import BookingForm from './components/BookingForm'; // Import the BookingForm component
+import Login from './components/Login'; 
+import Home from './components/Home'; 
+import BookingForm from './components/BookingForm'; 
+import CustomerCareForm from './components/CustomerCareForm';
+import ListCarForm from './components/ListCarForm';
+import Profile from './components/Profile';
 
 const App = () => {
-  const [cars, setCars] = useState([]); // State for cars
-  const [location, setLocation] = useState(''); // State for location
+  const [cars, setCars] = useState([]); 
+  const [location, setLocation] = useState(''); 
+
+  const onAddCar = (newCar) => {
+    // Allow adding a car with the same title
+    setCars((prevCars) => [...prevCars, newCar]); // Add the new car to the list
+  };
+
   const onRentNow = (carId) => {
-    // Function to handle renting a car
     console.log(`Renting car with ID: ${carId}`);
   };
 
@@ -21,6 +29,9 @@ const App = () => {
           <Route path="/home" element={<Home cars={cars} location={location} onRentNow={onRentNow} />} /> {/* Home page */}
           <Route path="/signup" element={<Signup />} />
           <Route path="/booking" element={<BookingForm />} /> {/* Booking form page */}
+          <Route path="/customer-care" element={<CustomerCareForm />} /> {/* Customer Care form page */}
+          <Route path="/listyourcars" element={<ListCarForm onAddCar={onAddCar} />} /> {/* Add Car form page */}
+          <Route path="/profile" element={<Profile/>}/>
         </Routes>
       </Router>
     </div>

@@ -2,9 +2,11 @@ import express from 'express';
 import mongoose from 'mongoose';
 import { v4 as uuidv4 } from 'uuid';
 import Booking from './bookingModel.js';
+import CustomerCare from './customerCareModel.js';
 import bcrypt from "bcrypt"; 
 import User from './SigningModel.js';
 import jwt from "jsonwebtoken";
+import authMiddleware from './authMiddleware.js';
 
 
 const carSchema = new mongoose.Schema({
@@ -67,7 +69,7 @@ router.get('/cars', async (req, res) => {
     res.json(cars);
 });
 
-router.get('/cars/:location', async (req, res) => {
+router.get('/cars/:location',authMiddleware, async (req, res) => {
     const car = await Car.findOne({ location: req.params.location });
     res.json(car);
 });
@@ -104,14 +106,14 @@ router.delete('/cars/:id', async (req, res) => {
 });
 
 router.post("/createuser", async (req, res) => {
-    const { email, username, password } = req.body;
+    const { email, username, password,phoneNumber,useraddrees } = req.body;
     const user = await User.findOne({ email });
     if (user) {
         return res.status(400).json({ message: "User already exists" });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = new User({ email, username, password: hashedPassword, id: uuidv4() });
+    const newUser = new User({ email, username, password: hashedPassword, id: uuidv4(),phoneNumber,useraddrees });
     await newUser.save();
     return res.status(201).json({ message: "User created successfully" });
 });
@@ -133,4 +135,35 @@ router.post("/login", async (req, res) => {
     // return res.status(200).json({ message: "Login successful" });
 });
 
-export default router; 
+router.post('/customer-care', async (req, res) => {
+    const { username, email, carName, location, description } = req.body;
+    const customerCareRequest = new CustomerCare({
+        username,
+        email,
+        carName,
+        location,
+        description
+    });
+    try {
+        await customerCareRequest.save();
+        res.status(201).json({ message: 'Customer care request created', customerCareRequest });
+    } catch (error) {
+        res.status(500).json({ message: 'Error creating customer care request', error: error.message });
+    }
+});
+
+router.get('/user/:username', authMiddleware, async (req, res) => {
+    const { username } = req.params;
+    const user = await User.findOne({ username });
+    if (!user) {
+        return res.status(404).json({ message: 'User not found' });
+    }
+    res.status(200).json({
+        username: user.username,
+        email: user.email,
+        phoneNumber: user.phoneNumber,
+        useraddrees: user.useraddrees
+    });
+});
+
+export default router;

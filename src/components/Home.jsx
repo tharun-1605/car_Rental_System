@@ -33,6 +33,33 @@ export const originalCars = [
     rating: 4.7,
     seats: 4,
   },
+  {
+    id: 4,
+    image: 'https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&q=80',
+    title: 'Tesla Model 3',
+    price: 150,
+    location: 'San Francisco, CA',
+    rating: 4.9,
+    seats: 5,
+  },
+  {
+    id: 5,
+    image: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80',
+    title: 'Porsche 911',
+    price: 300,
+    location: 'Los Angeles, CA',
+    rating: 4.8,
+    seats: 2,
+  },
+  {
+    id: 6,
+    image: 'https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&q=80',
+    title: 'BMW M4',
+    price: 200,
+    location: 'New York, NY',
+    rating: 4.7,
+    seats: 4,
+  },
 ];
 
 function Home() {
