@@ -11,8 +11,6 @@ const Login = () => {
     if(username=='123'&&password=='123'){
       navigate('/home');
     }
-    // Here you would typically handle authentication
-    // For now, we'll just navigate to the home page
     else {
       alert("invaild user name and password")
     }

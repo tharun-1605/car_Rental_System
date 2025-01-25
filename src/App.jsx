@@ -7,14 +7,14 @@ import BookingForm from './components/BookingForm';
 import CustomerCareForm from './components/CustomerCareForm';
 import ListCarForm from './components/ListCarForm';
 import Profile from './components/Profile';
+import HowItWorks from './components/HowItWorks'; // Importing the new component
 
 const App = () => {
   const [cars, setCars] = useState([]); 
   const [location, setLocation] = useState(''); 
 
   const onAddCar = (newCar) => {
-    // Allow adding a car with the same title
-    setCars((prevCars) => [...prevCars, newCar]); // Add the new car to the list
+    setCars((prevCars) => [...prevCars, newCar]); 
   };
 
   const onRentNow = (carId) => {
@@ -25,12 +25,13 @@ const App = () => {
     <div className="min-h-screen bg-gray-50">
       <Router>       
         <Routes>
-          <Route path="/" element={<Login />} /> {/* Login page */}
-          <Route path="/home" element={<Home cars={cars} location={location} onRentNow={onRentNow} />} /> {/* Home page */}
+          <Route path="/" element={<Login />} /> 
+          <Route path="/home" element={<Home cars={cars} location={location} onRentNow={onRentNow} />} /> 
           <Route path="/signup" element={<Signup />} />
-          <Route path="/booking" element={<BookingForm />} /> {/* Booking form page */}
-          <Route path="/customer-care" element={<CustomerCareForm />} /> {/* Customer Care form page */}
-          <Route path="/listyourcars" element={<ListCarForm onAddCar={onAddCar} />} /> {/* Add Car form page */}
+          <Route path="/booking" element={<BookingForm />} /> 
+          <Route path="/customer-care" element={<CustomerCareForm />} /> 
+          <Route path="/listyourcars" element={<ListCarForm onAddCar={onAddCar} />} />
+          <Route path="/how-it-works" element={<HowItWorks />} /> {/* New route for How It Works */}
           <Route path="/profile" element={<Profile/>}/>
         </Routes>
       </Router>

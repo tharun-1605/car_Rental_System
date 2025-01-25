@@ -1,12 +1,11 @@
 import React from 'react';
 import { MapPin, Star, Users } from 'lucide-react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useNavigate } from 'react-router-dom'; 
 
 const CarCard = ({ image, title, price, location, rating, seats }) => {
-  const navigate = useNavigate(); // Create navigate function
-
+  const navigate = useNavigate(); 
   const handleRentNow = () => {
-    navigate('/booking', { state: { title, price } }); // Navigate to booking form with car details
+    navigate('/booking', { state: { title, price } }); 
   };
 
   return (

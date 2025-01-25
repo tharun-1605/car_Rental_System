@@ -11,7 +11,7 @@ const CustomerCareForm = () => {
   });
 
   const [submitted, setSubmitted] = useState(false);
-  const navigate = useNavigate(); // Initialize navigate function
+  const navigate = useNavigate(); 
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,11 +23,11 @@ const CustomerCareForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Here you would typically send the formData to the backend
+    
     console.log('Complaint submitted:', formData);
     setSubmitted(true);
     setTimeout(() => {
-      navigate('/home'); // Redirect to home page after 2 seconds
+      navigate('/home');
     }, 2000);
   };
 

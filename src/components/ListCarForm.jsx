@@ -24,10 +24,10 @@ const ListCarForm = ({ onAddCar }) => {
     e.preventDefault();
     if (!carDetails.title || !carDetails.rating || !carDetails.year || !carDetails.seats || !carDetails.location || !carDetails.price) {
         alert('Please fill out all fields before submitting.');
-        return; // Prevent submission if validation fails
+        return;
     } 
     
-    onAddCar(carDetails); // Call the function to add the new car
+    onAddCar(carDetails); 
     setCarDetails({ title: '', rating: '', year: '', seats: '', location: '', price: '' }); // Reset form
   };
 

@@ -1,23 +1,23 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useNavigate } from 'react-router-dom'; 
 
 const Signup = () => {
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [phone, setPhone] = useState(''); // New state for phone number
-  const [reenterPassword, setReenterPassword] = useState(''); // New state for re-enter password
-  const [address, setAddress] = useState(''); // New state for address
+  const [phone, setPhone] = useState(''); 
+  const [reenterPassword, setReenterPassword] = useState('');
+  const [address, setAddress] = useState(''); 
   const [isSubmitted, setIsSubmitted] = useState(false); 
-  const [errorMessage, setErrorMessage] = useState(''); // New state for error message
-  const navigate = useNavigate(); // Create navigate function
+  const [errorMessage, setErrorMessage] = useState(''); 
+  const navigate = useNavigate(); 
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log({ email, username, password, phone, address });
     if (password !== reenterPassword) {
-      alert('Passwords do not match. Please try again.'); // Set error message
-      return; // Prevent navigation
+      alert('Passwords do not match. Please try again.'); 
+      return; 
     } else {
       setErrorMessage(''); 
       setIsSubmitted(true); 
