@@ -14,6 +14,7 @@ const BookingForm = () => {
   const [email, setEmail] = useState('');
   const [aadhaarNumber, setAadhaarNumber] = useState('');
   const [amount, setAmount] = useState(car.price);
+  const [carname]=useState(car.title)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,6 +28,7 @@ const BookingForm = () => {
       aadhaarNumber,
       amount,
       location: locationInput,
+      carname
     };
 
     try {

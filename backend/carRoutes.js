@@ -26,14 +26,15 @@ const Car = mongoose.model('Car', carSchema);
 const router = express.Router(); 
 
 router.post('/bookings', async (req, res) => {
-    const { name, phoneNumber, email, licenseNumber, aadharNumber, amount } = req.body;
+    const { name, phoneNumber, email, licenseNumber, aadharNumber, amount,carname } = req.body;
     const booking = new Booking({
-        name,
-        phoneNumber,
-        email,
-        licenseNumber,
-        aadharNumber,
-        amount
+            name,
+            phoneNumber,
+            email,
+            licenseNumber,
+            aadharNumber,
+            amount,
+            carname
     });
     await booking.save();
     res.status(201).json({ message: 'Booking created', booking });

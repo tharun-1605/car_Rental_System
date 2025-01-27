@@ -13,6 +13,7 @@ const bookingSchema = new mongoose.Schema({
     licenseNumber: String,
     aadharNumber: String,
     amount: Number,
+    carname:String,
 }, { timestamps: true });
 
 const Booking = mongoose.model('Booking', bookingSchema);
