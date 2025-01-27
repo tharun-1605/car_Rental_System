@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom'; 
+import { useLocation, useNavigate } from 'react-router-dom';
+import axios from 'axios'; // Import Axios
 
 const BookingForm = () => {
   const location = useLocation(); 
@@ -15,10 +15,29 @@ const BookingForm = () => {
   const [aadhaarNumber, setAadhaarNumber] = useState('');
   const [amount, setAmount] = useState(car.price);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert(`Booking confirmed for ${car.title}. Amount to be paid: $${amount}`);
-    navigate('/payment', { state: { car, amount } }); // Pass car and amount in state
+    
+    // Prepare booking data
+    const bookingData = {
+      name,
+      phoneNumber,
+      email,
+      licenseNumber,
+      aadhaarNumber,
+      amount,
+      location: locationInput,
+    };
+
+    try {
+      // Send POST request to the backend
+      const response = await axios.post('http://127.0.0.1:4000/api/bookings', bookingData);
+      alert(`Booking confirmed for ${car.title}. Amount to be paid: $${amount}`);
+      navigate('/payment', { state: { car, amount } }); // Pass car and amount in state
+    } catch (error) {
+      alert('Error confirming booking. Please try again.');
+      console.error('Booking error:', error);
+    }
   };
 
   return (
