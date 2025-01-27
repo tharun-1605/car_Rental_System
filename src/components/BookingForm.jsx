@@ -18,7 +18,7 @@ const BookingForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     alert(`Booking confirmed for ${car.title}. Amount to be paid: $${amount}`);
-    navigate('/home'); 
+    navigate('/payment', { state: { car, amount } }); // Pass car and amount in state
   };
 
   return (

@@ -6,6 +6,7 @@ const CarCard = ({ image, title, price, location, rating, seats }) => {
   const navigate = useNavigate(); 
   const handleRentNow = () => {
     navigate('/booking', { state: { title, price } }); 
+    
   };
 
   return (

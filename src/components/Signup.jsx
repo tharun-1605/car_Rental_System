@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; 
 
-const Signup = () => {
+const SignupUp = () => {
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -12,7 +12,7 @@ const Signup = () => {
   const [errorMessage, setErrorMessage] = useState(''); 
   const navigate = useNavigate(); 
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log({ email, username, password, phone, address });
     if (password !== reenterPassword) {
@@ -22,16 +22,41 @@ const Signup = () => {
       setErrorMessage(''); 
       setIsSubmitted(true); 
     } 
-    navigate('/home', {
-      state: {
-        user: {
-          name: username,
-          email: email,
-          phone: phone, 
-          address: address 
-        }
+    try {
+      const response = await fetch('http://127.0.0.1:4000/api/createuser', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email,
+          username,
+          password, 
+          phoneNumber: phone,
+          useraddrees: address,
+        }),
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        setIsSubmitted(true);
+        navigate('/profile', {
+          state: {
+            user: {
+              id: data.id, // Assuming the user ID is returned in the response
+              name: username,
+              email: email,
+              phone: phone, 
+              address: address 
+            }
+          }
+        });
+      } else {
+        setErrorMessage(data.message || 'Something went wrong. Please try again.');
       }
-    });
+    } catch (error) {
+      setErrorMessage('Network error. Please try again later.');
+    }
   };
 
   return (
@@ -112,4 +137,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default SignupUp;

@@ -1,9 +1,10 @@
+import axios from 'axios';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const CustomerCareForm = () => {
   const [formData, setFormData] = useState({
-    userName: '',
+    username: '',
     email: '',
     description: '',
     carName: '',
@@ -21,14 +22,22 @@ const CustomerCareForm = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
-    console.log('Complaint submitted:', formData);
-    setSubmitted(true);
-    setTimeout(() => {
-      navigate('/home');
-    }, 2000);
+    try {
+        console.log('Submitting complaint with data:', formData); // Log the request payload
+        const response = await axios.post('http://127.0.0.1:4000/api/customer-care', formData);
+        
+        const data = response.data; // Use the response data directly
+        console.log('Complaint submitted:', data);
+        setSubmitted(true);
+        setTimeout(() => {
+          navigate('/home');
+        }, 2000);
+    } catch (error) {
+        console.error('Error submitting complaint:', error);
+    }
   };
 
   if (submitted) {
@@ -47,8 +56,8 @@ const CustomerCareForm = () => {
         <label className="block text-gray-700">User Name</label>
         <input
           type="text"
-          name="userName"
-          value={formData.userName}
+          name="username"
+          value={formData.username}
           onChange={handleChange}
           className="border rounded w-full py-2 px-3"
           required

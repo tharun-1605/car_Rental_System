@@ -1,16 +1,19 @@
 import React, { useState } from 'react';
+import CarListing from './CarListing';
 import { Car, DollarSign, MapPin, Camera } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const ListCarForm = ({ onAddCar }) => {
   const [carDetails, setCarDetails] = useState({
-    title: '',
+    make: '',
     rating: '',
     year: '',
-    seats: '',
+    Seats: '',
     location: '',
     price: '',
   });
+
+  const [cars, setCars] = useState([]); // State for storing cars
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -20,15 +23,21 @@ const ListCarForm = ({ onAddCar }) => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!carDetails.title || !carDetails.rating || !carDetails.year || !carDetails.seats || !carDetails.location || !carDetails.price) {
+    if (!carDetails.make || !carDetails.rating || !carDetails.year || !carDetails.Seats || !carDetails.location || !carDetails.price) {
         alert('Please fill out all fields before submitting.');
         return;
     } 
     
-    onAddCar(carDetails); 
-    setCarDetails({ title: '', rating: '', year: '', seats: '', location: '', price: '' }); // Reset form
+    try {
+      const response = await axios.post('http://127.0.0.1:4000/api/cars', carDetails);
+      
+      alert('Car listed successfully!');
+      setCarDetails({ make: '', rating: '', year: '', Seats: '', location: '', price: '' }); // Reset form
+    } catch (error) {
+      alert('Network error. Please try again later.');
+    }
   };
 
   return (
@@ -40,8 +49,8 @@ const ListCarForm = ({ onAddCar }) => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <input
               type="text"
-              name="title"
-              value={carDetails.title}
+              name="make"
+              value={carDetails.make}
               onChange={handleChange}
               placeholder="Make"
               className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent"
@@ -64,7 +73,7 @@ const ListCarForm = ({ onAddCar }) => {
             />
             <input
               type="number"
-              name="seats"
+              name="Seats"
               value={carDetails.seats}
               onChange={handleChange}
               placeholder="Seats"
@@ -116,6 +125,7 @@ const ListCarForm = ({ onAddCar }) => {
           <span>List Your Car</span>
         </button>
       </form>
+      <CarListing cars={cars} /> {/* Render the CarListing component */}
     </div>
   );
 };

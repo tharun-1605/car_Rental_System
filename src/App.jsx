@@ -8,6 +8,7 @@ import CustomerCareForm from './components/CustomerCareForm';
 import ListCarForm from './components/ListCarForm';
 import Profile from './components/Profile';
 import HowItWorks from './components/HowItWorks'; // Importing the new component
+import PaymentPage from './components/PaymentPage';
 
 const App = () => {
   const [cars, setCars] = useState([]); 
@@ -33,6 +34,7 @@ const App = () => {
           <Route path="/listyourcars" element={<ListCarForm onAddCar={onAddCar} />} />
           <Route path="/how-it-works" element={<HowItWorks />} /> {/* New route for How It Works */}
           <Route path="/profile" element={<Profile/>}/>
+          <Route path="/payment" element={<PaymentPage/>}/>
         </Routes>
       </Router>
     </div>

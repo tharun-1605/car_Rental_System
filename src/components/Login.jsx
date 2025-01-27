@@ -1,18 +1,33 @@
 import React, { useState } from 'react';
+import axios from 'axios'; // Import Axios
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState(''); // Change username to email
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    if(username=='123'&&password=='123'){
-      navigate('/home');
-    }
-    else {
-      alert("invaild user name and password")
+    try {
+      const response = await axios.post('http://127.0.0.1:4000/api/login', {
+        email,
+        password,
+      });
+
+      if (response.status === 200) {
+        const userId = response.data.id; // Assuming the user ID is returned in the response
+        navigate('/home', {
+          state: {
+            user: {
+              id: userId,
+              email: email,
+            }
+          }
+        });
+      }
+    } catch (error) {
+      alert(error.response?.data?.message || 'Invalid email or password');
     }
   };
 
@@ -21,11 +36,11 @@ const Login = () => {
       <form onSubmit={handleLogin} className="bg-white p-6 rounded shadow-md">
         <h2 className="text-2xl mb-4">Login</h2>
         <div className="mb-4">
-          <label className="block text-gray-700">Username</label>
+          <label className="block text-gray-700">Email</label>
           <input
             type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             className="border rounded w-full py-2 px-3"
             required
           />
