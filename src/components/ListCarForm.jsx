@@ -41,6 +41,7 @@ const ListCarForm = ({ onAddCar }) => {
   };
 
   return (
+    
     <div className="bg-white p-6 rounded-lg shadow-lg max-w-2xl mx-auto">
       <h2 className="text-2xl font-bold text-gray-800 mb-6">List Your Car</h2>
       <form className="space-y-6" onSubmit={handleSubmit}>
@@ -125,7 +126,7 @@ const ListCarForm = ({ onAddCar }) => {
           <span>List Your Car</span>
         </button>
       </form>
-      <CarListing cars={cars} /> {/* Render the CarListing component */}
+      {/* <CarListing cars={cars} /> Render the CarListing component */}
     </div>
   );
 };
