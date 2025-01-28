@@ -6,13 +6,12 @@ const CarCard = ({ image, title, price, location, rating, seats }) => {
   const navigate = useNavigate(); 
   const handleRentNow = () => {
     navigate('/booking', { state: { title, price } }); 
-    
   };
 
   return (
     <div className="w-full h-auto bg-gray-200 rounded-xl shadow-2xl overflow-hidden hover:shadow-lg transition-shadow duration-300 transition delay-7000 transition duration-700 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-white ... ">
       <div className="relative h-48">
-        <img src="src/assets/image.png" alt={title} className="w-full h-full object-cover" />
+        <img src={image} alt={title} className="w-full h-full object-cover" /> {/* Updated to use image prop */}
       </div>
       <div className="p-4">
         <h3 className="text-lg font-semibold text-gray-800">{title}</h3>

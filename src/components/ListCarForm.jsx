@@ -10,6 +10,7 @@ const ListCarForm = ({ onAddCar }) => {
     Seats: '',
     location: '',
     price: '',
+    image: '' // Added image field
   });
 
   const handleChange = (e) => {
@@ -20,9 +21,23 @@ const ListCarForm = ({ onAddCar }) => {
     }));
   };
 
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setCarDetails((prevDetails) => ({
+        ...prevDetails,
+        image: reader.result // Store base64 string
+      }));
+    };
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!carDetails.make || !carDetails.rating || !carDetails.year || !carDetails.Seats || !carDetails.location || !carDetails.price) {
+    if (!carDetails.make || !carDetails.rating || !carDetails.year || !carDetails.Seats || !carDetails.location || !carDetails.price || !carDetails.image) {
         alert('Please fill out all fields before submitting.');
         return;
     } 
@@ -31,7 +46,7 @@ const ListCarForm = ({ onAddCar }) => {
       const response = await axios.post('http://127.0.0.1:4000/api/cars', carDetails);
       
       alert('Car listed successfully!');
-      setCarDetails({ make: '', rating: '', year: '', Seats: '', location: '', price: '' }); // Reset form
+      setCarDetails({ make: '', rating: '', year: '', Seats: '', location: '', price: '', image: '' }); // Reset form
     } catch (error) {
       alert('Network error. Please try again later.');
     }
@@ -111,10 +126,12 @@ const ListCarForm = ({ onAddCar }) => {
 
         <div>
           <label className="block text-gray-700 mb-2">Photos</label>
-          <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center">
-            <Camera className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-            <p className="text-gray-500">Drag and drop photos here or click to upload</p>
-          </div>
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handleImageChange}
+            className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+          />
         </div>
 
         <button type="submit" className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 flex items-center justify-center space-x-2">

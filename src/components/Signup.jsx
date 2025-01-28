@@ -58,7 +58,7 @@ const SignupUpdated = () => {
       <div className="flex w-auto max-w-4xl bg-green-200 rounded shadow-2xl">
         <div className="w-1/2 p-6">
           {isSubmitted ? (
-            <div className="text-center">Thank you for signing up!</div>
+            <div className="text-center">Olready Email Used !</div>
           ) : (
             <div className="max-w-md mx-auto mt-10">
               <h2 className="text-2xl font-bold mb-4">Sign Up</h2>

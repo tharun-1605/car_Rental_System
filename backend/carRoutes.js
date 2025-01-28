@@ -18,7 +18,8 @@ const carSchema = new mongoose.Schema({
     year: Number,
     price: Number,
     location: String,
-    Seats: Number
+    Seats: Number,
+    image: String // Added image field
 });
 
 const Car = mongoose.model('Car', carSchema);
@@ -69,14 +70,14 @@ router.get('/cars/:location', authMiddleware, async (req, res) => {
 
 router.post('/cars', async (req, res) => {
     const id = uuidv4();
-    const { make, rating, price, location, Seats } = req.body;
+    const { make, rating, price, location, Seats, image } = req.body; // Include image field
     if (!location || !Seats) {
         return res.status(400).json({ error: 'Location and Seats are required.' });
     }
 
     const formattedPrice = price ? Number(price.replace(/,/g, '')) : undefined;
     console.log('Request body:', req.body); // Log the entire request body
-    const newCar = new Car({ id, make, rating,  price: formattedPrice, location, Seats });
+    const newCar = new Car({ id, make, rating, price: formattedPrice, location, Seats, image }); // Save image
     try {
         await newCar.save();
     } catch (error) {
