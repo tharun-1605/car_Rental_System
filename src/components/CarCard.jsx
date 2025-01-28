@@ -10,9 +10,9 @@ const CarCard = ({ image, title, price, location, rating, seats }) => {
   };
 
   return (
-    <div className="w-full h-auto bg-gray-50 rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+    <div className="w-full h-auto bg-gray-200 rounded-xl shadow-2xl overflow-hidden hover:shadow-lg transition-shadow duration-300 transition delay-7000 transition duration-700 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-white ... ">
       <div className="relative h-48">
-        <img src={image} alt={title} className="w-full h-full object-cover" />
+        <img src="src/assets/image.png" alt={title} className="w-full h-full object-cover" />
       </div>
       <div className="p-4">
         <h3 className="text-lg font-semibold text-gray-800">{title}</h3>
@@ -37,7 +37,7 @@ const CarCard = ({ image, title, price, location, rating, seats }) => {
           </div>
           <button
             onClick={handleRentNow} 
-            className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+            className="bg-blue-600 text-white transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 ... px-4 py-2 rounded-lg hover:bg-blue-700">
             Rent Now
           </button>
         </div>

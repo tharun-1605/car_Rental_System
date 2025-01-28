@@ -43,7 +43,7 @@ const BookingForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md">
+    <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md p-8 rounded-lg mt-20 shadow-2xl max-w-2xl mx-auto">
       <h2 className="text-xl font-bold mb-4">Book {car.title}</h2>
       <div className="mb-4">
         <label className="block text-sm font-medium text-gray-700">Name</label>

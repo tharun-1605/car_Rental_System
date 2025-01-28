@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import CarListing from './CarListing';
 import { Car, DollarSign, MapPin, Camera } from 'lucide-react';
 import axios from 'axios';
 
@@ -12,8 +11,6 @@ const ListCarForm = ({ onAddCar }) => {
     location: '',
     price: '',
   });
-
-  const [cars, setCars] = useState([]); // State for storing cars
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -41,8 +38,7 @@ const ListCarForm = ({ onAddCar }) => {
   };
 
   return (
-    
-    <div className="bg-white p-6 rounded-lg shadow-lg max-w-2xl mx-auto">
+    <div className="bg-gray-100 p-8 rounded-lg mt-15 shadow-2xl max-w-2xl mx-auto transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 ... px-4 py-2 rounded-lg hover:bg-white">
       <h2 className="text-2xl font-bold text-gray-800 mb-6">List Your Car</h2>
       <form className="space-y-6" onSubmit={handleSubmit}>
         <div>
@@ -75,7 +71,7 @@ const ListCarForm = ({ onAddCar }) => {
             <input
               type="number"
               name="Seats"
-              value={carDetails.seats}
+              value={carDetails.Seats}
               onChange={handleChange}
               placeholder="Seats"
               className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent"
@@ -126,7 +122,6 @@ const ListCarForm = ({ onAddCar }) => {
           <span>List Your Car</span>
         </button>
       </form>
-      {/* <CarListing cars={cars} /> Render the CarListing component */}
     </div>
   );
 };
