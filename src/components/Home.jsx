@@ -42,10 +42,10 @@ function Home() {
     }, []);
 
   return ( 
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-black">
       {/* <Navbar /> */}
       <Hero onSearch={handleSearch} />
-      <div className="max-w-7xl mx-auto px-4 py-12">
+      <div className="max-w-7xl mx-auto px-4 py-12 bg-black">
         <CarListing cars={cars} />
       </div>
     </div>

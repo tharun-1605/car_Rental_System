@@ -10,7 +10,7 @@ const CarCard = ({ image, title, price, location, rating, seats }) => {
   };
 
   return (
-    <div className="w-full h-auto bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+    <div className="w-full h-auto bg-gray-50 rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
       <div className="relative h-48">
         <img src={image} alt={title} className="w-full h-full object-cover" />
       </div>

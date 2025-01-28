@@ -8,7 +8,7 @@ const Navbar = (props) => {
   };
 
   return (
-    <nav className="bg-white shadow-lg ">
+    <nav className="bg-blue-100 shadow-lg ">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center space-x-2">
@@ -17,7 +17,7 @@ const Navbar = (props) => {
           </div>
           
           <div className="hidden md:flex items-center space-x-8">
-          <Link to="/home" className="text-gray-600 hover:text-blue-600">Find Cars</Link>
+          <Link to="/home" className="text-gray-600 hover:text-blue-600">Home</Link>
             <Link to="/listyourcars" className="text-gray-600 hover:text-blue-600">List Your Car</Link>
             <Link to="/customer-care" className="text-gray-600 hover:text-blue-600">Customer Care</Link>
             <Link to="/how-it-works" className="text-gray-600 hover:text-blue-600">How it Works</Link>

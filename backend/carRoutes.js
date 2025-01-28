@@ -106,6 +106,11 @@ router.delete('/cars/:id', async (req, res) => {
 
 router.post("/createuser", async (req, res) => {
     const { email, username, password, phoneNumber, useraddrees } = req.body;
+
+    // Validate that password is provided
+    if (!password) {
+        return res.status(400).json({ message: "Password is required" });
+    }
     const user = await User.findOne({ email });
     if (user) {
         return res.status(400).json({ message: "User already exists" });
