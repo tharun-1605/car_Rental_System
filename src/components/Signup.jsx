@@ -34,7 +34,7 @@ const SignupUpdated = () => {
       const data = response.data;
       if (response.status === 201) {
         setIsSubmitted(true);
-        navigate('/profile', {
+        navigate('/home', {
           state: {
             user: {
               id: data.id,
