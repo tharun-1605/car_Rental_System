@@ -5,14 +5,16 @@ import axios from 'axios';
 const ProfileUpdated = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const [token, setToken] = useState();
+  const token = localStorage.getItem('token'); // Retrieve token from localStorage
   const [user, setUser] = useState(null);
-  const email = location.state?.email; // Assuming email is passed in location state
+  const email = location.state?.user?.email || 'Email not found'; // Access email from user object in location state
+  console.log('Location object:', location); // Log the entire location object
+  console.log('Email passed to Profile:', email); // Log the email to verify it's being passed correctly
+  console.log('Token retrieved from localStorage:', token); // Log the token to verify it's being retrieved correctly
 
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const token = localStorage.getItem('token'); // Retrieve token from localStorage
         const response = await axios.get(`https://backend-car-9baw.onrender.com/api/user/${email}`, {
           headers: {
             Authorization: `Bearer ${token}` // Include the token in the request headers
@@ -20,7 +22,6 @@ const ProfileUpdated = () => {
         });
         console.log('API Response:', response.data); // Log the response
         if (response.data) {
-          setToken(token);
           setUser(response.data);
         } else {
           console.error('No user data returned');
@@ -37,7 +38,7 @@ const ProfileUpdated = () => {
 
   const handleLogout = () => {
     localStorage.removeItem('token'); // Clear the token
-    navigate('/login'); // Redirect to login page
+    navigate('/'); // Redirect to login page
   };
 
   return (
