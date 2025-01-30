@@ -22,9 +22,9 @@ const Navbar = (props) => {
             <Link to="/customer-care" className="text-gray-600 hover:text-blue-600 transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 ... px-4 py-2 rounded-lg hover:bg-white">Customer Care</Link>
             <Link to="/how-it-works" className="text-gray-600 hover:text-blue-600 transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 ... px-4 py-2 rounded-lg hover:bg-white">How it Works</Link>
             <Link to="/profile" className="text-gray-600 hover:text-blue-600 transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 ... px-4 py-2 rounded-lg hover:bg-white">Profile</Link>
-            <button className="flex items-center space-x-2 transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 ... px-4 py-2 rounded-lg hover:bg-white" onClick={() => alert('Profile clicked!')}>
+            {/* <button className="flex items-center space-x-2 transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 ... px-4 py-2 rounded-lg hover:bg-white" onClick={() => alert('Profile clicked!')}>
               <img src="src/assets/222222221qqqq1111.jpg" alt="Profile" className="h-8 w-8 rounded-full " />
-            </button>
+            </button> */}
           </div>
           
           <div className="md:hidden">
