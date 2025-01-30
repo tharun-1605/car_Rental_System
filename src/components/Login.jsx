@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios'; // Import Axios
+import axios from 'axios'; 
 import { useNavigate } from 'react-router-dom';
 
 const LoginUpdatedWithYellowBackground = () => {
@@ -32,7 +32,7 @@ const LoginUpdatedWithYellowBackground = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-green-300">
+    <div className="flex items-center justify-center min-h-screen bg-white">
       <div className="flex w-full max-w-4xl bg-green-200 rounded shadow-2xl">
         <div className="w-1/2 p-6">
           <form onSubmit={handleLogin}>
@@ -73,10 +73,10 @@ const LoginUpdatedWithYellowBackground = () => {
                 Sign Up
               </button>
             </p>
-            <div className="mt-4">
+            {/* <div className="mt-4">
               <button className="bg-red-500 text-white py-2 px-4 rounded mr-2">Google</button>
               <button className="bg-blue-600 text-white py-2 px-4 rounded">Facebook</button>
-            </div>
+            </div> */}
           </form>
         </div>
         <div className="w-1/2 bg-yellow-200 flex items-center justify-center">

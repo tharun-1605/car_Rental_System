@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import Navbar from './Navbar';
 import Hero from './Hero';
 import CarListing from './CarListing';
-import ListCarForm from './ListCarForm';
-import CarCard from './CarCard'; // Corrected import statement
-import axios from 'axios';
 import { data } from 'react-router-dom';
 
 function Home() {

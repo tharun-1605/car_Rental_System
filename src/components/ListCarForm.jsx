@@ -53,7 +53,7 @@ const ListCarForm = ({ onAddCar }) => {
   };
 
   return (
-    <div className="bg-gray-100 p-8 rounded-lg mt-15 shadow-2xl max-w-2xl mx-auto transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 ... px-4 py-2 rounded-lg hover:bg-white">
+    <div className="bg-white p-8 rounded-lg mt-15 shadow-2xl max-w-2xl mx-auto ">
       <h2 className="text-2xl font-bold text-gray-800 mb-6">List Your Car</h2>
       <form className="space-y-6" onSubmit={handleSubmit}>
         <div>

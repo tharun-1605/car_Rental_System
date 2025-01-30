@@ -23,7 +23,7 @@ const PaymentPage = () => {
   };
 
   return (
-    <div className="bg-gray-100 p-6 rounded-2xl shadow-md max-w-md mx-auto mt-20 transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 ... px-4 py-2 rounded-lg hover:bg-white">
+    <div className="bg-white p-6 rounded-2xl shadow-2xl max-w-md mx-auto mt-20 ">
       <h2 className="text-xl font-bold mb-4">Payment Details</h2>
       <div className="mb-4">
         <label className="block text-sm font-medium text-gray-700">Car Title</label>
