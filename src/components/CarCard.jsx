@@ -2,16 +2,16 @@ import React from 'react';
 import { MapPin, Star, Users } from 'lucide-react';
 import { useNavigate } from 'react-router-dom'; 
 
-const CarCard = ({ image, title, price, location, rating, seats }) => {
+const CarCard = ({ id, image, title, price, location, rating, seats }) => {
   const navigate = useNavigate(); 
   const handleRentNow = () => {
-    navigate('/booking', { state: { title, price } }); 
+    navigate(`/car-details/${id}`, { state: { title, price, location, rating, seats, image } }); // Pass all necessary state
   };
 
   return (
     <div className="w-full h-auto bg-gray-200 rounded-xl shadow-2xl overflow-hidden hover:shadow-lg transition-shadow duration-300 transition delay-7000 transition duration-700 ease-in-out hover:-translate-y-1 hover:scale-100 hover:bg-white ... ">
       <div className="relative h-48">
-        <img src={image} alt={title} className="w-full h-full object-cover" /> {/* Updated to use image prop */}
+        <img src={image} alt={title} className="w-full h-full object-cover" />
       </div>
       <div className="p-4">
         <h3 className="text-lg font-semibold text-gray-800">{title}</h3>
