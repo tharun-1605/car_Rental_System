@@ -58,7 +58,7 @@ const SignupUpdated = () => {
       <div className="flex w-full max-w-4xl bg-green-200 rounded shadow-2xl">
         <div className="w-1/2 p-6">
           {isSubmitted ? (
-            <div className="text-center">Olready Email Used !</div>
+            <div className="text-center">Already Email Used!</div>
           ) : (
             <div className="max-w-md mx-auto mt-10">
               <h2 className="text-2xl font-bold mb-4">Sign Up</h2>
@@ -130,8 +130,9 @@ const SignupUpdated = () => {
             </div>
           )}
         </div>
-        <div className="w-1/2 bg-yellow-200 flex items-center justify-center">
-          <img src="src/assets/2897229.jpg" alt="Car" className="max-w-full h-auto" />
+        <div className="w-1/2 bg-gradient-to-r from-yellow-300 to-yellow-200 flex items-center justify-center p-10 rounded-lg shadow-lg">
+          <h1 className="text-3xl font-bold text-center text-gray-800">Welcome to Car Rental</h1>
+          <p className="mt-4 text-lg text-gray-600">Your journey starts here!</p>
         </div>
       </div>
     </div>
