@@ -55,7 +55,7 @@ const SignupUpdated = () => {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-white">
-      <div className="flex w-auto max-w-4xl bg-green-200 rounded shadow-2xl">
+      <div className="flex w-full max-w-4xl bg-green-200 rounded shadow-2xl">
         <div className="w-1/2 p-6">
           {isSubmitted ? (
             <div className="text-center">Olready Email Used !</div>

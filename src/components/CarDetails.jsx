@@ -27,7 +27,7 @@ const CarDetails = () => {
           <h1 className="text-2xl font-bold">{title}</h1>
           <p className="text-lg">Seats: {seats}</p>
           <p className="text-lg">Doors: 4</p>
-          <p className="text-lg">Mileage: {mileage}</p>
+          <p className="text-lg">Mileage:12 {mileage}</p>
           <p className="text-lg">Location: {carLocation}</p>
           <p className="text-lg">Rating: {rating}</p>
           <p className="text-2xl font-bold text-red-600">Price: $ {price}</p>
