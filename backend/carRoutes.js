@@ -19,6 +19,7 @@ const carSchema = new mongoose.Schema({
     price: Number,
     location: String,
     Seats: Number,
+    mileage:Number,
     image: String // Added image field
 });
 
@@ -70,14 +71,14 @@ router.get('/cars/:location', authMiddleware, async (req, res) => {
 
 router.post('/cars', async (req, res) => {
     const id = uuidv4();
-    const { make, rating, price, location, Seats, image } = req.body; // Include image field
+    const { make, rating, price, location, Seats, mileage, image } = req.body; // Include image field
     if (!location || !Seats) {
         return res.status(400).json({ error: 'Location and Seats are required.' });
     }
 
     const formattedPrice = price ? Number(price.replace(/,/g, '')) : undefined;
     console.log('Request body:', req.body); // Log the entire request body
-    const newCar = new Car({ id, make, rating, price: formattedPrice, location, Seats, image }); // Save image
+    const newCar = new Car({ id, make, rating, price: formattedPrice, location, Seats,mileage, image }); // Save image
     try {
         await newCar.save();
     } catch (error) {
@@ -157,9 +158,9 @@ router.post('/customer-care', async (req, res) => {
     }
 });
 
-router.get('/user/:username', authMiddleware, async (req, res) => {
-    const { username } = req.params;
-    const user = await User.findOne({ username });
+router.get('/user/:email', authMiddleware, async (req, res) => {
+    const { email } = req.params;
+    const user = await User.findOne({ email });
     if (!user) {
         return res.status(404).json({ message: 'User not found' });
     }

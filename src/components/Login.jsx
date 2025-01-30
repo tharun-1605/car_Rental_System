@@ -17,6 +17,7 @@ const LoginUpdatedWithYellowBackground = () => {
 
       if (response.status === 200) {
         const userId = response.data.id;
+        localStorage.setItem('token', response.data.token); // Store token in local storage
         navigate('/home', {
           state: {
             user: {
@@ -73,10 +74,6 @@ const LoginUpdatedWithYellowBackground = () => {
                 Sign Up
               </button>
             </p>
-            {/* <div className="mt-4">
-              <button className="bg-red-500 text-white py-2 px-4 rounded mr-2">Google</button>
-              <button className="bg-blue-600 text-white py-2 px-4 rounded">Facebook</button>
-            </div> */}
           </form>
         </div>
         <div className="w-1/2 bg-yellow-200 flex items-center justify-center">

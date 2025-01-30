@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Car, DollarSign, MapPin, Camera } from 'lucide-react';
+import { Car, DollarSign, MapPin } from 'lucide-react';
 import axios from 'axios';
 
 const ListCarForm = ({ onAddCar }) => {
@@ -10,7 +10,8 @@ const ListCarForm = ({ onAddCar }) => {
     Seats: '',
     location: '',
     price: '',
-    image: '' // Added image field
+    mileage: '', // New state for mileage
+    image: ''
   });
 
   const handleChange = (e) => {
@@ -37,16 +38,15 @@ const ListCarForm = ({ onAddCar }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!carDetails.make || !carDetails.rating || !carDetails.year || !carDetails.Seats || !carDetails.location || !carDetails.price || !carDetails.image) {
+    if (!carDetails.make || !carDetails.rating || !carDetails.year || !carDetails.Seats || !carDetails.location || !carDetails.price || !carDetails.mileage || !carDetails.image) {
         alert('Please fill out all fields before submitting.');
         return;
     } 
     
     try {
       const response = await axios.post('http://127.0.0.1:4000/api/cars', carDetails);
-      
       alert('Car listed successfully!');
-      setCarDetails({ make: '', rating: '', year: '', Seats: '', location: '', price: '', image: '' }); // Reset form
+      setCarDetails({ make: '', rating: '', year: '', Seats: '', location: '', price: '', mileage: '', image: '' }); // Reset form
     } catch (error) {
       alert('Network error. Please try again later.');
     }
@@ -89,6 +89,14 @@ const ListCarForm = ({ onAddCar }) => {
               value={carDetails.Seats}
               onChange={handleChange}
               placeholder="Seats"
+              className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+            />
+            <input
+              type="text"
+              name="mileage"
+              value={carDetails.mileage}
+              onChange={handleChange}
+              placeholder="Mileage"
               className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent"
             />
           </div>

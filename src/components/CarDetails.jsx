@@ -10,7 +10,7 @@ const CarDetails = () => {
     return <Navigate to="/home" />; // Redirect to home if no state is found
   }
 
-  const { title, price, location: carLocation, rating, seats, image } = location.state;
+  const { title, price, location: carLocation, rating, seats, mileage, image } = location.state;
 
   const handleRentNow = () => {
     navigate('/booking', { state: { title, price } }); // Navigate to booking form
@@ -26,11 +26,11 @@ const CarDetails = () => {
         <div className="ml-4">
           <h1 className="text-2xl font-bold">{title}</h1>
           <p className="text-lg">Seats: {seats}</p>
-          <p className="text-lg">Doors: 3</p>
-          <p className="text-lg">Mileage: Unlimited</p>
+          <p className="text-lg">Doors: 4</p>
+          <p className="text-lg">Mileage: {mileage}</p>
           <p className="text-lg">Location: {carLocation}</p>
           <p className="text-lg">Rating: {rating}</p>
-          <p className="text-2xl font-bold text-red-600">Price: INR {price}</p>
+          <p className="text-2xl font-bold text-red-600">Price: $ {price}</p>
           <button 
             onClick={handleRentNow} 
             className="bg-blue-600 text-white px-4 py-2 rounded-lg mt-4">
