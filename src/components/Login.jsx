@@ -18,7 +18,8 @@ const LoginUpdatedWithYellowBackground = () => {
       if (response.status === 200) {
         const userId = response.data.id;
         localStorage.setItem('token', response.data.token); // Store token in local storage
-        navigate('/profile', {
+        localStorage.setItem('email', email); // Store email in local storage
+        navigate('/home', {
           state: {
             user: {
               id: userId,

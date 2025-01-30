@@ -7,12 +7,26 @@ const ProfileUpdated = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem('token'); // Retrieve token from localStorage
   const [user, setUser] = useState(null);
-  const email = location.state?.user?.email || 'Email not found'; // Access email from user object in location state
+const email = location.state?.user?.email || localStorage.getItem('email'); // Access email from user object in location state or local storage
+
+// useEffect(() => {
+//   if (!token || !email) {
+//     console.error('User not authenticated or no valid email found.');
+//     navigate('/'); // Redirect to login page if not authenticated
+//     return; // Prevent rendering
+//   }
+// }, [token, email]);
+
+if (!email) {
+  console.error('No valid email found. Cannot fetch user data.');
+  return <div>No valid email provided. Please check your login or try again.</div>; // Display message if email is not valid
+}
   console.log('Location object:', location); // Log the entire location object
   console.log('Email passed to Profile:', email); // Log the email to verify it's being passed correctly
   console.log('Token retrieved from localStorage:', token); // Log the token to verify it's being retrieved correctly
 
   useEffect(() => {
+    if(token){
     const fetchUserData = async () => {
       try {
         const response = await axios.get(`https://backend-car-9baw.onrender.com/api/user/${email}`, {
@@ -34,6 +48,7 @@ const ProfileUpdated = () => {
     if (email) {
       fetchUserData();
     }
+  }
   }, [email]);
 
   const handleLogout = () => {
