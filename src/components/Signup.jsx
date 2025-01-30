@@ -23,7 +23,7 @@ const SignupUpdated = () => {
       setIsSubmitted(true); 
     } 
     try {
-        const response = await axios.post('http://127.0.0.1:4000/api/createuser', {
+        const response = await axios.post('https://backend-car-9baw.onrender.com/api/createuser', {
           email,
           username,
           password, 

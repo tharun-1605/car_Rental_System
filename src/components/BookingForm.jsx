@@ -33,7 +33,7 @@ const BookingForm = () => {
 
     try {
       // Send POST request to the backend
-      const response = await axios.post('http://127.0.0.1:4000/api/bookings', bookingData);
+      const response = await axios.post('https://backend-car-9baw.onrender.com/api/bookings', bookingData);
       alert(`Booking confirmed for ${car.title}. Amount to be paid: $${amount}`);
       navigate('/payment', { state: { car, amount } }); // Pass car and amount in state
     } catch (error) {

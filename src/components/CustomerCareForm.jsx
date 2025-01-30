@@ -27,7 +27,7 @@ const CustomerCareForm = () => {
     
     try {
         console.log('Submitting complaint with data:', formData);
-        const response = await axios.post('http://127.0.0.1:4000/api/customer-care', formData);
+        const response = await axios.post('https://backend-car-9baw.onrender.com/api/customer-care', formData);
         
         const data = response.data;
         console.log('Complaint submitted:', data);

@@ -22,7 +22,7 @@ function Home() {
   useEffect(() => {
       const fetchCars = async () => {
         try {
-          const response = await fetch('http://127.0.0.1:4000/api/cars');
+          const response = await fetch('https://backend-car-9baw.onrender.com/api/cars');
           if (response.ok) {
             const data = await response.json();
             setCars(data); 

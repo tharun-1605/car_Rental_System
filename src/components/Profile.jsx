@@ -13,7 +13,7 @@ const ProfileUpdated = () => {
     const fetchUserData = async () => {
       try {
         const token = localStorage.getItem('token'); // Retrieve token from localStorage
-        const response = await axios.get(`http://localhost:5000/api/user/${email}`, {
+        const response = await axios.get(`https://backend-car-9baw.onrender.com/api/user/${email}`, {
           headers: {
             Authorization: `Bearer ${token}` // Include the token in the request headers
           }
