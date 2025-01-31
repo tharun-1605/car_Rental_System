@@ -14,7 +14,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="glass-effect sticky top-0 z-50 animate-fadeIn">
+    <nav className="glass-effect top-0 z-50 animate-fadeIn">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between items-center h-16">
           {/* Logo Section */}
