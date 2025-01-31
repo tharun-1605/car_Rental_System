@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Car, User, Menu, X } from 'lucide-react';
+import { Car, User, Menu, X, LogOut } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
+
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { isAuthenticated, logout } = useAuth();
+
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -47,10 +51,27 @@ const Navbar = () => {
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 transition-all group-hover:w-full"></span>
               </span>
             </Link>
-            <Link to="/profile" className="btn-primary flex items-center space-x-2">
-              <User className="h-4 w-4" />
-              <span>Profile</span>
-            </Link>
+            {isAuthenticated ? (
+              <>
+                <Link to="/profile" className="btn-primary flex items-center space-x-2">
+                  <User className="h-4 w-4" />
+                  <span>Profile</span>
+                </Link>
+                <button 
+                  onClick={logout}
+                  className="nav-link flex items-center space-x-2 text-red-600 hover:text-red-700"
+                >
+                  <LogOut className="h-4 w-4" />
+                  <span>Logout</span>
+                </button>
+              </>
+            ) : (
+              <Link to="/" className="btn-primary flex items-center space-x-2">
+                <User className="h-4 w-4" />
+                <span>Login</span>
+              </Link>
+            )}
+
           </div>
           
           {/* Mobile Menu Button */}
@@ -76,7 +97,20 @@ const Navbar = () => {
               <Link to="/listyourcars" className="nav-link text-center">List Your Car</Link>
               <Link to="/customer-care" className="nav-link text-center">Customer Care</Link>
               <Link to="/how-it-works" className="nav-link text-center">How it Works</Link>
-              <Link to="/profile" className="btn-primary text-center mt-4">Profile</Link>
+              {isAuthenticated ? (
+                <>
+                  <Link to="/profile" className="btn-primary text-center mt-4">Profile</Link>
+                  <button 
+                    onClick={logout}
+                    className="nav-link text-center mt-2 text-red-600 hover:text-red-700"
+                  >
+                    Logout
+                  </button>
+                </>
+              ) : (
+                <Link to="/" className="btn-primary text-center mt-4">Login</Link>
+              )}
+
             </div>
           </div>
         )}

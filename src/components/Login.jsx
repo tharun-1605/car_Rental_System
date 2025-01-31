@@ -1,12 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { Mail, Lock, User, ArrowRight } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
+
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
+  const { login, isAuthenticated } = useAuth();
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/home');
+    }
+  }, [isAuthenticated, navigate]);
+
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -18,7 +28,7 @@ const Login = () => {
 
       if (response.status === 200) {
         const userId = response.data.id;
-        localStorage.setItem('token', response.data.token);
+        login(response.data.token);
         localStorage.setItem('email', email);
         navigate('/home', {
           state: {
@@ -29,6 +39,7 @@ const Login = () => {
           }
         });
       }
+
     } catch (error) {
       alert(error.response?.data?.message || 'Invalid email or password');
     }

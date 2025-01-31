@@ -11,26 +11,8 @@ const Profile = () => {
   const [loading, setLoading] = useState(true);
   const email = location.state?.user?.email || localStorage.getItem('email');
 
-  if (!email) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-blue-100">
-        <div className="glass-effect p-8 rounded-2xl text-center animate-fadeIn">
-          <AlertCircle className="h-12 w-12 text-red-500 mx-auto mb-4" />
-          <h2 className="text-xl font-bold text-gray-900 mb-2">Authentication Error</h2>
-          <p className="text-gray-600 mb-4">No valid email found. Please check your login credentials.</p>
-          <button 
-            onClick={() => navigate('/')} 
-            className="btn-primary"
-          >
-            Return to Login
-          </button>
-        </div>
-      </div>
-    );
-  }
-
   useEffect(() => {
-    if (token) {
+    if (token && email) {
       const fetchUserData = async () => {
         try {
           const response = await axios.get(`https://backend-car-9baw.onrender.com/api/user/${email}`, {
@@ -48,9 +30,7 @@ const Profile = () => {
         }
       };
 
-      if (email) {
-        fetchUserData();
-      }
+      fetchUserData();
     }
   }, [email, token]);
 
@@ -59,6 +39,24 @@ const Profile = () => {
     localStorage.removeItem('email');
     navigate('/');
   };
+
+  if (!email) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-blue-100">
+        <div className="glass-effect p-8 rounded-2xl text-center animate-fadeIn">
+          <AlertCircle className="h-12 w-12 text-red-500 mx-auto mb-4" />
+          <h2 className="text-xl font-bold text-gray-900 mb-2">Authentication Error</h2>
+          <p className="text-gray-600 mb-4">No valid email found. Please check your login credentials.</p>
+          <button 
+            onClick={() => navigate('/')} 
+            className="btn-primary"
+          >
+            Return to Login
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   if (loading) {
     return (
@@ -144,34 +142,9 @@ const Profile = () => {
           {/* Quick Actions */}
           <div className="space-y-8">
             <div className="glass-effect p-6 rounded-2xl">
-              {/* <h3 className="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h3> */}
               <div className="space-y-3">
-                {/* {[
-                  { icon: Car, text: 'My Rentals', color: 'text-blue-600' },
-                  { icon: Calendar, text: 'Booking History', color: 'text-green-600' },
-                  { icon: Shield, text: 'Security Settings', color: 'text-purple-600' },
-                  { icon: Clock, text: 'Recent Activity', color: 'text-orange-600' }
-                ].map((item, index) => (
-                  <button
-                    key={index}
-                    className="w-full p-3 flex items-center space-x-3 bg-white/50 rounded-xl hover:bg-white/80 transition-colors"
-                  >
-                    <item.icon className={`h-5 w-5 ${item.color}`} />
-                    <span className="font-medium text-gray-900">{item.text}</span>
-                  </button>
-                ))} */}
               </div>
             </div>
-
-            {/* Membership Status */}
-            {/* <div className="glass-effect p-6 rounded-2xl bg-gradient-to-br from-blue-500 to-blue-600 text-white">
-              <h3 className="text-lg font-semibold mb-2">Premium Member</h3>
-              <p className="text-blue-100 text-sm mb-4">Enjoy exclusive benefits and priority support</p>
-              <div className="w-full bg-white/20 rounded-full h-2 mb-2">
-                <div className="bg-white rounded-full h-2 w-3/4"></div>
-              </div>
-              <p className="text-sm text-blue-100">75% towards next reward</p>
-            </div> */}
           </div>
         </div>
       </div>
