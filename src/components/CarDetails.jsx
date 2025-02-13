@@ -1,5 +1,7 @@
 import React from 'react';
 import { useLocation, Navigate, useNavigate } from 'react-router-dom';
+
+import { useLocation, Navigate, useNavigate } from 'react-router-dom';
 import { 
   Car, MapPin, Star, Users, Gauge, Fuel, Settings, Shield, 
   Phone, Clock, CheckCircle, Info, Heart
@@ -13,7 +15,8 @@ const CarDetails = () => {
     return <Navigate to="/home" />;
   }
 
-  const { title, price, location: carLocation, rating, seats, mileage, image, fuelType, transmission, description } = location.state;
+  const { title, price, location: carLocation, rating, seats, mileage, image, fuelType, transmission, description } = location.state || {};
+
 
   const handleRentNow = () => {
     navigate('/booking', { state: { title, price } });
@@ -47,6 +50,9 @@ const CarDetails = () => {
               <div className="absolute bottom-4 left-4 text-white">
                 <Car className="h-8 w-8 mb-2" />
                 <span className="font-semibold">View Gallery</span>
+                <p className="text-gray-500">Fuel Type: {fuelType}</p>
+                <p className="text-gray-500">Transmission: {transmission}</p>
+
               </div>
             </div>
           </div>

@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 
@@ -15,7 +16,9 @@ import MainLayout from './components/MainLayout';
 import CarDetails from './components/CarDetails';
 
 const App = () => {
-  const [cars, setCars] = useState([]); 
+  const [cars, setCars] = useState([]);
+  const [newFeature, setNewFeature] = useState(''); // New state for additional feature
+
   const [location, setLocation] = useState(''); 
 
   const onAddCar = (newCar) => {
@@ -26,7 +29,13 @@ const App = () => {
     console.log(`Renting car with ID: ${carId}`);
   };
 
+  useEffect(() => {
+    // Fetch initial data or perform setup for new features
+    console.log('New feature setup');
+  }, []); // Empty dependency array to run once on mount
+
   return (
+
     <Router>
       <AuthProvider>
         <div className="min-h-screen bg-gray-50">
@@ -39,7 +48,8 @@ const App = () => {
               <Route path="/booking" element={<BookingForm />} /> 
               <Route path="/customer-care" element={<CustomerCareForm />} /> 
               <Route path="/listyourcars" element={<ListCarForm onAddCar={onAddCar} />} />
-              <Route path="/how-it-works" element={<HowItWorks />} />
+              <Route path="/how-it-works" element={<HowItWorks newFeature={newFeature} />} />
+
               <Route path="/profile" element={<Profile/>}/>
               <Route path="/payment" element={<PaymentPage/>}/>
             </Route>

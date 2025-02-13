@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
+import { useEffect } from 'react';
+
 import { Car, DollarSign, MapPin, Upload, Camera, Calendar, Users, Gauge, Info, Shield, CheckCircle } from 'lucide-react';
 import axios from 'axios';
 
 const ListCarForm = ({ onAddCar }) => {
   const [carDetails, setCarDetails] = useState({
+    fuelType: '', // New field for fuel type
+
     make: '',
     rating: '',
     year: '',
@@ -11,7 +15,9 @@ const ListCarForm = ({ onAddCar }) => {
     location: '',
     price: '',
     mileage: '',
-    image: ''
+    image: '',
+    transmission: '' // New field for transmission type
+
   });
 
   const [previewImage, setPreviewImage] = useState(null);
@@ -42,6 +48,12 @@ const ListCarForm = ({ onAddCar }) => {
   };
 
   const handleSubmit = async (e) => {
+    // Validate new fields
+    if (!carDetails.fuelType || !carDetails.transmission) {
+      alert('Please fill out all fields before submitting.');
+      return;
+    }
+
     e.preventDefault();
     if (!carDetails.make || !carDetails.rating || !carDetails.year || !carDetails.Seats || 
         !carDetails.location || !carDetails.price || !carDetails.mileage || !carDetails.image) {
@@ -53,7 +65,8 @@ const ListCarForm = ({ onAddCar }) => {
     try {
       const response = await axios.post('https://backend-car-9baw.onrender.com/api/cars', carDetails);
       alert('Car listed successfully!');
-      setCarDetails({ make: '', rating: '', year: '', Seats: '', location: '', price: '', mileage: '', image: '' });
+        setCarDetails({ make: '', rating: '', year: '', Seats: '', location: '', price: '', mileage: '', image: '', fuelType: '', transmission: '' });
+
       setPreviewImage(null);
       setStep(1);
     } catch (error) {
