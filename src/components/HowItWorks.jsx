@@ -18,15 +18,6 @@ const HowItWorks = () => {
             <h3 className="text-xl font-semibold">Book Your Car</h3>
             <p className="mt-2">Select your car and complete the booking.</p>
           </div>
-          <div className="p-4 bg-white rounded-lg shadow-md">
-            <h3 className="text-xl font-semibold">Enjoy Your Ride</h3>
-            <p className="mt-2">Pick up your car and enjoy your journey!</p>
-          </div>
-          <div className="p-4 bg-white rounded-lg shadow-md">
-            <h3 className="text-xl font-semibold">Return the Car</h3>
-            <p className="mt-2">Return the car at the designated location.</p>
-          </div>
-
         </div>
       </div>
     </div>
